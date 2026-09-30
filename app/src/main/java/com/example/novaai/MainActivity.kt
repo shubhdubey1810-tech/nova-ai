@@ -21,8 +21,14 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.credentials.CredentialManager
+import androidx.credentials.CustomCredential
+import androidx.credentials.GetCredentialRequest
+import com.google.android.libraries.identity.googleid.GetGoogleIdOption
+import com.google.android.libraries.identity.googleid.GoogleIdTokenCredential
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
@@ -192,6 +198,20 @@ fun NovaAIApp(
 
     val coroutineScope = rememberCoroutineScope()
 
+    val context = LocalContext.current
+
+    val credentialManager = remember(context) {
+        CredentialManager.create(context)
+    }
+
+    var googleEmail by remember {
+        mutableStateOf<String?>(null)
+    }
+
+    var googleName by remember {
+        mutableStateOf<String?>(null)
+    }
+
     MaterialTheme(
         colorScheme = darkColorScheme(
             background = Color(0xFF0A0A0A),
@@ -240,14 +260,73 @@ fun NovaAIApp(
 
                 OutlinedButton(
                     onClick = {
-                        // Google Sign-In will be connected
-                        // after backend OAuth is configured.
+
+                        coroutineScope.launch {
+
+                            try {
+
+                                val googleIdOption =
+                                    GetGoogleIdOption.Builder()
+                                        .setFilterByAuthorizedAccounts(false)
+                                        .setServerClientId(
+                                            "670068485437-j90jpjjtu83o5tlsqpae4vr7fgbnvpc3.apps.googleusercontent.com"
+                                        )
+                                        .setAutoSelectEnabled(false)
+                                        .build()
+
+                                val request =
+                                    GetCredentialRequest.Builder()
+                                        .addCredentialOption(
+                                            googleIdOption
+                                        )
+                                        .build()
+
+                                val result =
+                                    credentialManager.getCredential(
+                                        context = context,
+                                        request = request
+                                    )
+
+                                val credential =
+                                    result.credential
+
+                                if (
+                                    credential is CustomCredential &&
+                                    credential.type ==
+                                    GoogleIdTokenCredential
+                                        .TYPE_GOOGLE_ID_TOKEN_CREDENTIAL
+                                ) {
+
+                                    val googleCredential =
+                                        GoogleIdTokenCredential
+                                            .createFrom(
+                                                credential.data
+                                            )
+
+                                    googleName =
+                                        googleCredential.displayName
+
+                                    googleEmail =
+                                        googleCredential.id
+
+                                }
+
+                            } catch (e: Exception) {
+
+                                googleName = "Google Sign-In failed"
+
+                                googleEmail =
+                                    "${e::class.java.simpleName}: " +
+                                    "${e.localizedMessage ?: "Unknown error"}"
+                            }
+                        }
                     },
                     shape = RoundedCornerShape(10.dp)
                 ) {
                     Text(
-                        text = "Google",
-                        fontSize = 12.sp
+                        text =
+                            googleName
+                                ?: "Continue with Google"
                     )
                 }
             }
