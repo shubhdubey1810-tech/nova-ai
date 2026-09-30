@@ -39,6 +39,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 FRONTEND_DIR = BASE_DIR / "frontend"
 
 DOWNLOADS_DIR = BASE_DIR / "downloads"
+DOWNLOADS_DIR.mkdir(parents=True, exist_ok=True)
 
 INDEX_FILE = FRONTEND_DIR / "index.html"
 
