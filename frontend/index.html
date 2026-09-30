@@ -1,0 +1,601 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>NØVA AI</title>
+
+    <link rel="stylesheet" href="/static/style.css">
+    <link rel="manifest" href="/static/manifest.webmanifest">
+
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background: #0a0a0a;
+            color: white;
+            block-size: 100vh;
+            overflow: hidden;
+        }
+
+        .app {
+            display: flex;
+            block-size: 100vh;
+        }
+
+        /* Sidebar */
+
+        .sidebar {
+            inline-size: 260px;
+            background: #111111;
+            border-inline-end: 1px solid #252525;
+            padding: 22px;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .logo {
+            font-size: 26px;
+            font-weight: 700;
+            letter-spacing: 1px;
+            margin-block-end: 30px;
+        }
+
+        .new-chat {
+            border: none;
+            background: white;
+            color: black;
+            padding: 13px;
+            border-radius: 12px;
+            cursor: pointer;
+            font-size: 15px;
+            font-weight: bold;
+            margin-block-end: 20px;
+        }
+
+        .menu {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .menu button {
+            background: transparent;
+            color: #cccccc;
+            border: none;
+            text-align: start;
+            padding: 12px;
+            border-radius: 10px;
+            cursor: pointer;
+            font-size: 14px;
+        }
+
+        .menu button:hover {
+            background: #1d1d1d;
+            color: white;
+        }
+
+        .version {
+            margin-block-start: auto;
+            color: #666;
+            font-size: 12px;
+        }
+
+        /* Main */
+
+        .main {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .topbar {
+            block-size: 65px;
+            border-block-end: 1px solid #252525;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 25px;
+        }
+
+        .topbar-title {
+            font-size: 18px;
+            font-weight: 600;
+        }
+
+        .status {
+            color: #7cff8b;
+            font-size: 13px;
+        }
+
+        /* Search */
+
+        .search-area {
+            padding: 18px 25px 5px;
+        }
+
+        .search-box {
+            max-inline-size: 850px;
+            margin: auto;
+            position: relative;
+        }
+
+        .search-box input {
+            inline-size: 100%;
+            background: #151515;
+            border: 1px solid #303030;
+            color: white;
+            padding: 15px 50px 15px 18px;
+            border-radius: 14px;
+            outline: none;
+            font-size: 15px;
+        }
+
+        .search-box input:focus {
+            border-color: #555;
+        }
+
+        .search-icon {
+            position: absolute;
+            inset-inline-end: 18px;
+            inset-block-start: 50%;
+            transform: translateY(-50%);
+            color: #888;
+        }
+
+        /* Chat */
+
+        .chat {
+            flex: 1;
+            overflow-y: auto;
+            padding: 25px;
+        }
+
+        .chat-content {
+            max-inline-size: 850px;
+            margin: auto;
+        }
+
+        .welcome {
+            text-align: center;
+            margin-block-start: 12vh;
+        }
+
+        .nova-symbol {
+            font-size: 55px;
+            margin-block-end: 15px;
+        }
+
+        .nova-splash-logo {
+            display: block;
+            inline-size: 70px;
+            block-size: 70px;
+            object-fit: contain;
+            margin: 0 auto 18px;
+        }
+
+        .welcome h1 {
+            font-size: 34px;
+            margin-block-end: 10px;
+        }
+
+        .welcome p {
+            color: #888;
+            font-size: 15px;
+        }
+
+        .message {
+            margin: 20px 0;
+            padding: 15px 18px;
+            border-radius: 14px;
+            line-height: 1.5;
+            max-inline-size: 80%;
+        }
+
+        .user {
+            background: #222222;
+            margin-inline-start: auto;
+        }
+
+        .nova {
+            background: #141414;
+            border: 1px solid #252525;
+            margin-inline-end: auto;
+        }
+
+        /* Input */
+
+        .input-area {
+            padding: 15px 25px 22px;
+        }
+
+        .input-container {
+            max-inline-size: 850px;
+            margin: auto;
+            display: flex;
+            align-items: center;
+            background: #151515;
+            border: 1px solid #303030;
+            border-radius: 16px;
+            padding: 7px;
+        }
+
+        .input-container input {
+            flex: 1;
+            background: transparent;
+            border: none;
+            outline: none;
+            color: white;
+            padding: 13px;
+            font-size: 15px;
+        }
+
+        .input-container button {
+            border: none;
+            inline-size: 42px;
+            block-size: 42px;
+            border-radius: 12px;
+            cursor: pointer;
+            background: white;
+            color: black;
+            font-size: 18px;
+        }
+
+        .input-container button:hover {
+            opacity: 0.85;
+        }
+
+        @media (max-inline-size: 700px) {
+
+            .sidebar {
+                display: none;
+            }
+
+            .welcome h1 {
+                font-size: 27px;
+            }
+
+            .search-area,
+            .chat,
+            .input-area {
+                padding-inline-start: 15px;
+                padding-inline-end: 15px;
+            }
+
+        }
+
+        .topbar-right {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
+
+        .login-button {
+            border: none;
+            background: white;
+            color: black;
+            padding: 9px 14px;
+            border-radius: 10px;
+            cursor: pointer;
+            font-size: 13px;
+            font-weight: 600;
+        }
+
+        .login-button:hover {
+            opacity: 0.85;
+        }
+
+        .profile-menu {
+            display: none;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .user-avatar {
+            inline-size: 36px;
+            block-size: 36px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 1px solid #333;
+        }
+
+        .user-info {
+            display: flex;
+            flex-direction: column;
+            min-inline-size: 130px;
+        }
+
+        .user-info strong {
+            font-size: 13px;
+        }
+
+        .user-info span {
+            color: #777;
+            font-size: 11px;
+            margin-block-start: 2px;
+        }
+
+        .logout-button {
+            border: 1px solid #333;
+            background: #161616;
+            color: white;
+            padding: 8px 11px;
+            border-radius: 9px;
+            cursor: pointer;
+            font-size: 12px;
+        }
+
+        .logout-button:hover {
+            background: #222;
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="app">
+
+    <!-- Sidebar -->
+
+    <aside class="sidebar">
+
+        <div class="logo">
+            NØVA
+        </div>
+
+        <button class="new-chat" onclick="newChat()">
+            + New Chat
+        </button>
+
+        <div class="menu">
+
+            <button onclick="focusChat()">
+                💬 Chat
+            </button>
+
+            <button onclick="focusSearch()">
+                🔍 Search
+            </button>
+
+            <button onclick="showMemory()">
+                🧠 Memory
+            </button>
+
+            <button onclick="showTools()">
+                🛠 Tools
+            </button>
+
+        </div>
+
+        <div class="history-header">
+            Recent Chats
+        </div>
+
+        <div
+            class="chat-history"
+            id="conversationList"
+        ></div>
+
+        <div class="version">
+            NØVA AI 1.0.0
+        </div>
+
+    </aside>
+
+
+    <!-- Main -->
+
+    <main class="main">
+
+        <header class="topbar">
+
+            <div class="topbar-title">
+                NØVA AI
+            </div>
+
+            <div class="topbar-right">
+
+                <div class="status">
+                    ● Online
+                </div>
+
+                <button
+                    id="loginButton"
+                    class="login-button"
+                    onclick="loginWithGoogle()"
+                >
+                    Continue with Google
+                </button>
+
+                <div
+                    id="profileMenu"
+                    class="profile-menu"
+                >
+
+                    <img
+                        id="userAvatar"
+                        class="user-avatar"
+                        src=""
+                        alt="Profile"
+                    >
+
+                    <div class="user-info">
+
+                        <strong id="userName">
+                            User
+                        </strong>
+
+                        <span id="userEmail">
+                        </span>
+
+                    </div>
+
+                    <button
+                        class="logout-button"
+                        onclick="logout()"
+                    >
+                        Logout
+                    </button>
+
+                </div>
+
+            </div>
+
+        </header>
+
+
+        <!-- Search Bar -->
+
+        <section class="search-area">
+
+            <div class="search-box">
+
+                <input
+                    id="searchInput"
+                    type="text"
+                    placeholder="Search the web or ask NØVA..."
+                    onkeydown="searchKey(event)"
+                >
+
+                <span class="search-icon">
+                    🔍
+                </span>
+
+            </div>
+
+        </section>
+
+
+        <section class="nova-install-section">
+
+            <div class="install-card">
+
+                <img
+                    src="/static/icons/icon-192.png"
+                    alt="NØVA AI"
+                    class="install-icon"
+                >
+
+                <h2>Install NØVA AI</h2>
+
+                <p>
+                    Use NØVA AI on your device with a fast and simple installation.
+                </p>
+
+                <div class="install-buttons">
+
+                    <button
+                        class="install-btn"
+                        onclick="installNovaPWA()"
+                    >
+                        Install App
+                    </button>
+
+                    <a
+                        href="/downloads/nova-ai.apk"
+                        class="download-btn"
+                        download
+                    >
+                        Download Android APK
+                    </a>
+
+                    <a
+                        href="/downloads/nova-ai-windows.exe"
+                        class="download-btn"
+                        download
+                    >
+                        Download Windows
+                    </a>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- Chat -->
+
+        <section class="chat" id="chat">
+
+            <div class="chat-content" id="chatContent">
+
+                <div class="welcome">
+
+                    <img
+                        src="/static/icons/icon-512.png"
+                        alt="NØVA AI"
+                        class="nova-splash-logo"
+                    >
+
+                    <h1>
+                        What can I help you with?
+                    </h1>
+
+                    <p>
+                        Ask NØVA anything.
+                    </p>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- Chat Input -->
+
+        <section class="input-area">
+
+            <div class="input-container">
+
+                <input
+                    id="messageInput"
+                    type="text"
+                    placeholder="Message NØVA..."
+                    onkeydown="messageKey(event)"
+                >
+
+                <button onclick="sendMessage()">
+                    ↑
+                </button>
+
+            </div>
+
+        </section>
+
+    </main>
+
+</div>
+
+
+<script src="/static/script.js"></script>
+<script>
+if ("serviceWorker" in navigator) {
+    window.addEventListener("load", () => {
+        navigator.serviceWorker.register(
+            "/service-worker.js",
+            { scope: "/" }
+        ).then(() => {
+            console.log("NØVA Service Worker registered");
+        }).catch(error => {
+            console.error(
+                "NØVA Service Worker registration failed:",
+                error
+            );
+        });
+    });
+}
+</script>
+</body>
+</html>

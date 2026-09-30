@@ -1,0 +1,38 @@
+.env
+.env.*
+!.env.example
+
+__pycache__/
+*.pyc
+
+.venv/
+venv/
+env/
+
+.idea/
+.vscode/
+
+*.db
+*.sqlite
+*.sqlite3
+
+node_modules/
+
+.DS_Store
+Thumbs.db
+
+# Android / Gradle
+.gradle/
+**/build/
+build/
+captures/
+local.properties
+
+# Secrets
+client_secret.json
+*.pem
+*.key
+# Generated installers
+downloads/
+*.apk
+*.exe

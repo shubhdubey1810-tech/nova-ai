@@ -1,0 +1,863 @@
+/* =========================================
+   NØVA AI 1.0
+   Main Interface Styles
+   ========================================= */
+
+
+/* ---------- Global ---------- */
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+html,
+body {
+    width: 100%;
+    height: 100%;
+}
+
+body {
+    font-family:
+        Inter,
+        Arial,
+        Helvetica,
+        sans-serif;
+
+    background: #080808;
+    color: #ffffff;
+
+    overflow: hidden;
+}
+
+
+/* ---------- Main App ---------- */
+
+.app {
+    display: flex;
+    width: 100%;
+    height: 100vh;
+}
+
+
+/* ---------- Sidebar ---------- */
+
+.sidebar {
+    width: 260px;
+    height: 100vh;
+
+    background: #101010;
+
+    border-right: 1px solid #252525;
+
+    padding: 22px;
+
+    display: flex;
+    flex-direction: column;
+}
+
+
+/* ---------- Logo ---------- */
+
+.logo {
+    font-size: 27px;
+
+    font-weight: 700;
+
+    letter-spacing: 2px;
+
+    margin-bottom: 30px;
+
+    user-select: none;
+}
+
+
+/* ---------- New Chat ---------- */
+
+.new-chat {
+    width: 100%;
+
+    padding: 13px 15px;
+
+    border: none;
+    border-radius: 12px;
+
+    background: #ffffff;
+    color: #000000;
+
+    font-size: 14px;
+    font-weight: 600;
+
+    cursor: pointer;
+
+    transition:
+        transform 0.2s,
+        opacity 0.2s;
+}
+
+.new-chat:hover {
+    opacity: 0.9;
+}
+
+.new-chat:active {
+    transform: scale(0.98);
+}
+
+
+/* ---------- Menu ---------- */
+
+.menu {
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 6px;
+
+    margin-top: 20px;
+}
+
+.menu button {
+    width: 100%;
+
+    padding: 12px;
+
+    border: none;
+
+    border-radius: 10px;
+
+    background: transparent;
+
+    color: #aaaaaa;
+
+    text-align: left;
+
+    font-size: 14px;
+
+    cursor: pointer;
+
+    transition:
+        background 0.2s,
+        color 0.2s;
+}
+
+.menu button:hover {
+    background: #1d1d1d;
+
+    color: #ffffff;
+}
+
+
+/* ---------- Version ---------- */
+
+.version {
+    margin-top: auto;
+
+    color: #666666;
+
+    font-size: 12px;
+}
+
+
+/* ---------- Main ---------- */
+
+.main {
+    flex: 1;
+
+    height: 100vh;
+
+    display: flex;
+
+    flex-direction: column;
+
+    min-width: 0;
+}
+
+
+/* ---------- Top Bar ---------- */
+
+.topbar {
+    height: 65px;
+
+    flex-shrink: 0;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    padding: 0 25px;
+
+    border-bottom: 1px solid #252525;
+
+    background: #090909;
+}
+
+.topbar-title {
+    font-size: 18px;
+
+    font-weight: 600;
+}
+
+.status {
+    color: #7cff8b;
+
+    font-size: 13px;
+}
+
+
+/* ---------- Search Area ---------- */
+
+.search-area {
+    width: 100%;
+
+    padding:
+        18px
+        25px
+        5px;
+}
+
+.search-box {
+    position: relative;
+
+    width: 100%;
+
+    max-width: 850px;
+
+    margin: auto;
+}
+
+.search-box input {
+    width: 100%;
+
+    height: 52px;
+
+    padding:
+        0
+        50px
+        0
+        18px;
+
+    border:
+        1px solid
+        #303030;
+
+    border-radius: 14px;
+
+    outline: none;
+
+    background: #151515;
+
+    color: #ffffff;
+
+    font-size: 15px;
+
+    transition:
+        border 0.2s,
+        background 0.2s;
+}
+
+.search-box input::placeholder {
+    color: #777777;
+}
+
+.search-box input:focus {
+    border-color: #555555;
+
+    background: #181818;
+}
+
+
+/* ---------- Search Icon ---------- */
+
+.search-icon {
+    position: absolute;
+
+    right: 18px;
+
+    top: 50%;
+
+    transform:
+        translateY(-50%);
+
+    color: #888888;
+
+    font-size: 17px;
+
+    pointer-events: none;
+}
+
+
+/* ---------- Install Section ---------- */
+
+.nova-install-section {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    padding: 50px 20px;
+}
+
+.install-card {
+    width: min(500px, 100%);
+    padding: 35px;
+    text-align: center;
+    border-radius: 25px;
+    background: rgba(255, 255, 255, 0.06);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    backdrop-filter: blur(20px);
+}
+
+.install-icon {
+    width: 90px;
+    height: 90px;
+    border-radius: 22px;
+    object-fit: cover;
+}
+
+.install-card h2 {
+    color: white;
+    margin: 20px 0 10px;
+    font-size: 28px;
+}
+
+.install-card p {
+    color: #aaa;
+    margin-bottom: 25px;
+}
+
+.install-buttons {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.install-btn,
+.download-btn {
+    width: 100%;
+    padding: 14px;
+    border-radius: 12px;
+    border: none;
+    text-decoration: none;
+    cursor: pointer;
+    font-size: 16px;
+    box-sizing: border-box;
+}
+
+.install-btn {
+    background: white;
+    color: black;
+}
+
+.download-btn {
+    background: rgba(255, 255, 255, 0.08);
+    color: white;
+    border: 1px solid rgba(255, 255, 255, 0.15);
+}
+
+.download-btn:hover,
+.install-btn:hover {
+    opacity: 0.85;
+}
+
+
+/* ---------- Chat ---------- */
+
+.chat {
+    flex: 1;
+
+    overflow-y: auto;
+
+    padding: 25px;
+}
+
+
+/* Scrollbar */
+
+.chat::-webkit-scrollbar {
+    width: 7px;
+}
+
+.chat::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+.chat::-webkit-scrollbar-thumb {
+    background: #303030;
+
+    border-radius: 10px;
+}
+
+
+/* ---------- Chat Content ---------- */
+
+.chat-content {
+    width: 100%;
+
+    max-width: 850px;
+
+    margin: auto;
+}
+
+
+/* ---------- Welcome ---------- */
+
+.welcome {
+    text-align: center;
+
+    margin-top: 12vh;
+
+    animation:
+        novaAppear
+        0.5s
+        ease;
+}
+
+.nova-symbol {
+    width: 70px;
+
+    height: 70px;
+
+    margin:
+        0
+        auto
+        18px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    border:
+        1px solid
+        #303030;
+
+    border-radius: 22px;
+
+    background: #151515;
+
+    font-size: 34px;
+}
+
+.welcome h1 {
+    margin-bottom: 10px;
+
+    font-size: 34px;
+
+    font-weight: 600;
+}
+
+.welcome p {
+    color: #888888;
+
+    font-size: 15px;
+}
+
+
+/* ---------- Messages ---------- */
+
+.message {
+    max-width: 80%;
+
+    margin:
+        20px
+        0;
+
+    padding:
+        14px
+        18px;
+
+    border-radius: 14px;
+
+    line-height: 1.5;
+
+    font-size: 15px;
+
+    word-wrap: break-word;
+
+    animation:
+        messageAppear
+        0.25s
+        ease;
+}
+
+
+/* User */
+
+.user {
+    margin-left: auto;
+
+    background: #252525;
+
+    color: #ffffff;
+
+    border-bottom-right-radius: 5px;
+}
+
+
+/* NØVA */
+
+.nova {
+    margin-right: auto;
+
+    background: #141414;
+
+    border:
+        1px solid
+        #252525;
+
+    color: #eeeeee;
+
+    border-bottom-left-radius: 5px;
+}
+
+
+/* ---------- Input Area ---------- */
+
+.input-area {
+    width: 100%;
+
+    padding:
+        15px
+        25px
+        22px;
+}
+
+.input-container {
+    width: 100%;
+
+    max-width: 850px;
+
+    margin: auto;
+
+    display: flex;
+
+    align-items: center;
+
+    padding: 7px;
+
+    background: #151515;
+
+    border:
+        1px solid
+        #303030;
+
+    border-radius: 16px;
+
+    transition:
+        border 0.2s;
+}
+
+.input-container:focus-within {
+    border-color: #555555;
+}
+
+
+/* ---------- Message Input ---------- */
+
+.input-container input {
+    flex: 1;
+
+    min-width: 0;
+
+    padding:
+        13px;
+
+    border: none;
+
+    outline: none;
+
+    background: transparent;
+
+    color: #ffffff;
+
+    font-size: 15px;
+}
+
+.input-container input::placeholder {
+    color: #777777;
+}
+
+
+/* ---------- Send Button ---------- */
+
+.input-container button {
+    width: 42px;
+
+    height: 42px;
+
+    flex-shrink: 0;
+
+    border: none;
+
+    border-radius: 12px;
+
+    background: #ffffff;
+
+    color: #000000;
+
+    font-size: 19px;
+
+    cursor: pointer;
+
+    transition:
+        transform 0.15s,
+        opacity 0.15s;
+}
+
+.input-container button:hover {
+    opacity: 0.85;
+}
+
+.input-container button:active {
+    transform: scale(0.92);
+}
+
+
+/* ---------- Animations ---------- */
+
+@keyframes novaAppear {
+
+    from {
+        opacity: 0;
+
+        transform:
+            translateY(15px);
+    }
+
+    to {
+        opacity: 1;
+
+        transform:
+            translateY(0);
+    }
+}
+
+
+@keyframes messageAppear {
+
+    from {
+        opacity: 0;
+
+        transform:
+            translateY(8px);
+    }
+
+    to {
+        opacity: 1;
+
+        transform:
+            translateY(0);
+    }
+}
+
+
+/* ---------- Mobile ---------- */
+
+@media (max-width: 700px) {
+
+    .sidebar {
+        display: none;
+    }
+
+    .topbar {
+        padding:
+            0
+            15px;
+    }
+
+    .search-area {
+        padding:
+            15px
+            15px
+            5px;
+    }
+
+    .chat {
+        padding:
+            15px;
+    }
+
+    .input-area {
+        padding:
+            10px
+            15px
+            15px;
+    }
+
+    .welcome {
+        margin-top: 10vh;
+    }
+
+    .welcome h1 {
+        font-size: 27px;
+    }
+
+    .message {
+        max-width: 90%;
+    }
+}
+
+
+/* ---------- Reduced Motion ---------- */
+
+@media (prefers-reduced-motion: reduce) {
+
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+
+        animation-iteration-count: 1 !important;
+
+        scroll-behavior: auto !important;
+
+        transition-duration: 0.01ms !important;
+    }
+}
+
+
+/* =========================================
+   CHAT HISTORY
+   ========================================= */
+
+.history-header {
+    margin-top: 24px;
+    margin-bottom: 10px;
+
+    color: #777777;
+
+    font-size: 11px;
+
+    text-transform: uppercase;
+
+    letter-spacing: 0.08em;
+}
+
+.chat-history {
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 5px;
+
+    overflow-y: auto;
+
+    max-height: 45vh;
+
+    padding-right: 3px;
+}
+
+.chat-history::-webkit-scrollbar {
+    width: 5px;
+}
+
+.chat-history::-webkit-scrollbar-thumb {
+    background: #303030;
+
+    border-radius: 10px;
+}
+
+.chat-history-empty {
+    color: #555555;
+
+    font-size: 12px;
+
+    padding: 8px;
+}
+
+.conversation-item {
+    width: 100%;
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 6px;
+
+    background: transparent;
+
+    border: 1px solid transparent;
+
+    color: #aaaaaa;
+
+    padding: 9px;
+
+    border-radius: 9px;
+
+    cursor: pointer;
+
+    text-align: left;
+
+    transition:
+        background 0.2s,
+        color 0.2s,
+        border 0.2s;
+}
+
+.conversation-item:hover {
+    background: #1a1a1a;
+
+    color: #ffffff;
+}
+
+.conversation-item.active {
+    background: #1d1d1d;
+
+    color: #ffffff;
+
+    border-color: #2b2b2b;
+}
+
+.conversation-title {
+    flex: 1;
+
+    min-width: 0;
+
+    overflow: hidden;
+
+    text-overflow: ellipsis;
+
+    white-space: nowrap;
+
+    font-size: 13px;
+}
+
+.delete-conversation {
+    width: 24px;
+
+    height: 24px;
+
+    flex-shrink: 0;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    border: none;
+
+    border-radius: 6px;
+
+    background: transparent;
+
+    color: #666666;
+
+    cursor: pointer;
+}
+
+.delete-conversation:hover {
+    background: #292929;
+
+    color: #ffffff;
+}
+
+@media (max-width: 700px) {
+
+    .history-header,
+    .chat-history {
+        display: none;
+    }
+}
